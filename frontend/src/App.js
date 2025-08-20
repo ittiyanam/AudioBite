@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import DishesList from "./DishesList";
 import DishForm from "./DishForm";
+import './index.css';
+
 
 function App() {
   const [dishes, setDishes] = useState([]);
@@ -20,12 +21,18 @@ function App() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">🍽️ AudioBite</h1>
+    <div className="min-h-screen bg-rose-50">
+    <div className="max-w-2xl mx-auto p-5">
+      <h1 className="text-6xl font-extrabold font-dm text-rose-400 text-center">
+        AudioBite
+      </h1>
 
-      <DishForm onDishAdded={handleDishAdded} />
-
-      <h2 className="text-xl font-semibold mt-6">All Dishes</h2>
+      {dishes.length === 0 ? (
+        <div className="flex flex-col items-center justify-center mt-6 text-gray-400 pb-7">
+          <span className="text-8xl mb-5">^_^</span>
+          <p className="text-lg">Nothing added yet! Time to add your first dish.</p>
+        </div>
+      ) : (
       <ul className="space-y-4 mt-2">
         {dishes.map((dish, i) => (
           <li key={i} className="border p-3 rounded">
@@ -48,6 +55,11 @@ function App() {
           </li>
         ))}
       </ul>
+      )}
+
+      <DishForm onDishAdded={handleDishAdded} />
+
+    </div>
     </div>
   );
 }
